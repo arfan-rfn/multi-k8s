@@ -1,9 +1,30 @@
 sudo: required
 services:
   - docker
+env:
+  global:
+    - SHA=$(git rev-parse HEAD)
+    - CLOUDSDK_CORE_DISABLE_PROMPTS=1 # google cloud don't prompt for any confirmation
 before_install:
   - openssl aes-256-cbc -K $encrypted_9f3b5599b056_key -iv $encrypted_9f3b5599b056_iv -in service-account.json.enc -out service-account.json -d
   - curl https://skd.cloud.goolge.com | bash > /dev/null;
   - source $HOME/google-cloud-sdk/path.bash.inc
   - gcloud components update kubectl
   - gcloud auth activate-service-account --key-file service-account.json
+  # always need to run this 3 commands when setting up a new cluster on gcloud
+  - gcloud config set project multi-k8s-319704
+  - gcloud config set compute/zone us-west4-a
+  - gcloud container clusters get-credentials multi-cluster
+  # after that don't forget to set up the cluster secret like db password
+  # kubectl create secret generic pgpassword --from-literal PGPASSWORD:mypgpassword123
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+  - docker build -t arfanrfn/react-test -f ./client/Dockerfile.dev ./client
+
+script:
+  - docker run -e CI=true arfanrfn/react-test npm test
+
+deploy:
+  provider: script
+  script: bash ./deploy.sh
+  on:
+    branch: master
