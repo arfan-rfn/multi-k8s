@@ -11,6 +11,6 @@ docker push arfanrfn/multi-server:$SHA
 docker push arfanrfn/multi-worker:$SHA
 
 kubectl apply -f k8s
-kubectl set image deployments/client-deployment clinet=arfanrfn/multi-client:$SHA
+kubectl set image deployments/client-deployment client=arfanrfn/multi-client:$SHA
 kubectl set image deployments/server-deployment server=arfanrfn/multi-server:$SHA
 kubectl set image deployments/worker-deployment worker=arfanrfn/multi-worker:$SHA
