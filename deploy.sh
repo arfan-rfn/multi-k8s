@@ -1,10 +1,10 @@
-docker build -t arfanrfn/multi-client:latest -t arfan/multi-client:$SHA -f ./client/Dockerfile ./client
-docker build -t arfanrfn/multi-server:latest -t arfan/multi-server:$SHA -f ./server/Dockerfile ./server
-docker build -t arfanrfn/multi-worker:latest -t arfan/multi-worker:$SHA -f ./worker/Dockerfile ./worker
+docker build -t arfanrfn/multi-client:latest -t arfanrfn/multi-client:$SHA -f ./client/Dockerfile ./client
+docker build -t arfanrfn/multi-server:latest -t arfanrfn/multi-server:$SHA -f ./server/Dockerfile ./server
+docker build -t arfanrfn/multi-worker:latest -t arfanrfn/multi-worker:$SHA -f ./worker/Dockerfile ./worker
 
-# docker push arfanrfn/multi-client:latest
-# docker push arfanrfn/multi-server:latest
-# docker push arfanrfn/multi-worker:latest
+docker push arfanrfn/multi-client:latest
+docker push arfanrfn/multi-server:latest
+docker push arfanrfn/multi-worker:latest
 
 docker push arfanrfn/multi-client:$SHA
 docker push arfanrfn/multi-server:$SHA
