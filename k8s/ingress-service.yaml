@@ -9,17 +9,36 @@
         # ADD THIS LINE ABOVE
         nginx.ingress.kubernetes.io/rewrite-target: /$1
         # UPDATE THIS LINE ABOVE
+        cert-manager.io/cluster-issuer: "letsencrypt-prod"
+        nginx.ingress.kubernetes.io/ssl-redirect: 'true'
     spec:
+      tls:
+        - hosts: # array of array needs double indentation
+            - selfdevs.com
+            - www.selfdevs.com
+          secretName:
+            selfdevs
       rules:
-        - http:
+        - host: selfdevs.com
+          http:
             paths:
               - path: /?(.*)
-              # UPDATE THIS LINE ABOVE
                 backend:
                   serviceName: client-cluster-ip-service
                   servicePort: 3000
               - path: /api/?(.*)
-              # UPDATE THIS LINE ABOVE
+                backend:
+                  serviceName: server-cluster-ip-service
+                  servicePort: 5000
+
+        - host: www.selfdevs.com
+          http:
+            paths:
+              - path: /?(.*)
+                backend:
+                  serviceName: client-cluster-ip-service
+                  servicePort: 3000
+              - path: /api/?(.*)
                 backend:
                   serviceName: server-cluster-ip-service
                   servicePort: 5000
