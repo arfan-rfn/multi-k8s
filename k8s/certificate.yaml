@@ -1,0 +1,15 @@
+# Object describing details about the certificate that should be obtain
+# The actual certificate object
+apiVersion: cert-manager.io/v1
+kind: certificate
+metadata:
+  name: selfdevs-tls
+spec:
+  secretName: selfdevs
+  issuerRef:
+    name: letsencrypt-prod
+    kind: ClusterIssuer
+  commonName: selfdevs.com
+  dnsNames:
+    - selfdevs.com
+    - www.selfdevs.com

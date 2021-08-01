@@ -1,0 +1,16 @@
+# issue a new https certificate
+# The object telling cert manager where to get the certificate from
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: letsencrypt-prod
+spec:
+  acme:
+    server: https://acme-v02.api.letsencrypt.org/directory
+    email: 'arfan.rfn@gmail.com'
+    privateKeySecreteRef:
+      name: letsencrypt-prod
+    solvers:
+      - http01:
+        ingress:
+          class: nginx
