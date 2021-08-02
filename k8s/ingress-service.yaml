@@ -17,7 +17,7 @@
             - selfdevs.com
             - www.selfdevs.com
           secretName:
-            selfdevs-m6rj2
+            selfdevs-tls-vlt56
       rules:
         - host: selfdevs.com
           http:
