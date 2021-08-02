@@ -7,10 +7,10 @@ metadata:
 spec:
   acme:
     server: https://acme-v02.api.letsencrypt.org/directory
-    email: 'arfan.rfn@gmail.com'
-    privateKeySecreteRef:
+    email: "arfan.rfn@gmail.com"
+    privateKeySecretRef:
       name: letsencrypt-prod
     solvers:
-    - http01:
-        ingress:
-          class: nginx
+      - http01:
+          ingress:
+            class: nginx
