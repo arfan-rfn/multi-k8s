@@ -16,6 +16,8 @@
         - hosts: # array of array needs double indentation
             - selfdevs.com
             - www.selfdevs.com
+            - onebyo.com
+            - www.onebyo.com
           secretName:
             selfdevs
       rules:
