@@ -1,0 +1,17 @@
+# For local development
+apiVersion: skaffold/v2beta12
+kind: Config
+build:
+  local:
+    push: false
+  artifacts:
+    - image: arfanrfn/multi-client
+      context: client
+      docker:
+        dockerfile: Dockerfile.dev
+      sync:
+        '**/*.js': .
+        '**/*.css': .
+        '**/*.html': .
+
+
