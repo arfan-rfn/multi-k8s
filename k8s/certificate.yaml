@@ -1,7 +1,7 @@
 # Object describing details about the certificate that should be obtain
 # The actual certificate object
 apiVersion: cert-manager.io/v1
-kind: certificate
+kind: Certificate
 metadata:
   name: selfdevs-tls
 spec:
